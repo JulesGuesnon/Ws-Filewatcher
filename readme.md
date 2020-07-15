@@ -42,6 +42,19 @@ ws-filewatcher -f path/to/my/file
 | default value | _(number)_`9999`                     |
 | description   | Set the port of the WebSocket server |
 
+|               | Command                                      |
+| ------------- | -------------------------------------------- |
+| parameter     | `--command`                                  |
+| shortcut      | `-c`                                         |
+| default value | _(string)_`""`                               |
+| description   | The command will be run on every file update |
+
+### Full example
+
+```bash
+ws-filewatcher -f path/to/my/file -p 8080 -v -c 'cp folder/file other/folder/file'
+```
+
 ### Client example
 
 _The example assume you are running the code inside a browser_
