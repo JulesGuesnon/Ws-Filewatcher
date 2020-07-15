@@ -1,7 +1,7 @@
 {
     "name": "ws-filewatcher",
     "author": "Jules Guesnon<guesnonj@outlook.fr>",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "main": "src/Index.bs.js",
     "bin": {
         "ws-filewatcher": "./bin/ws-filewatcher.js"
