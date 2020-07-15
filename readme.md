@@ -41,3 +41,15 @@ ws-filewatcher -f path/to/my/file
 | shortcut      | `-p`                                 |
 | default value | _(number)_`9999`                     |
 | description   | Set the port of the WebSocket server |
+
+### Client example
+
+_The example assume you are running the code inside a browser_
+
+```javascript
+const ws = new WebSocket('ws://localhost:9999')
+
+ws.onmessage = () => {
+    console.log('My file was updated!')
+}
+```
