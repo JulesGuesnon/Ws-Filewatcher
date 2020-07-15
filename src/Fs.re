@@ -8,3 +8,5 @@ type option = {interval: int};
 external watchFile: (string, option, ('a, 'a) => unit) => t = "watchFile";
 
 [@bs.send] external on: (t, string, unit => unit) => unit = "on";
+
+[@bs.send] external off: (t, string, unit => unit) => unit = "off";

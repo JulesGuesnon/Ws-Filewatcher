@@ -1,17 +1,20 @@
 open Ws;
 open Yargs;
 
+[@bs.module "child_process"] external exec: string => unit = "exec";
+
 exception NotFound;
 
 type argv = {
   port: int,
   file: string,
   verbose: option(bool),
+  command: option(string),
 };
 
 type option = {port: int};
 
-let {port, file, verbose} =
+let {port, file, verbose, command} =
   yargs
   ->usage("Usage: $0 <path-to-file> [options]")
   ->alias("f", "file")
@@ -22,6 +25,14 @@ let {port, file, verbose} =
         description: "Set the port of the WebSocket server",
         alias: "p",
         type_: "number",
+      },
+    )
+  ->option(
+      "command",
+      {
+        description: "Run the command on every file update",
+        alias: "c",
+        type_: "string",
       },
     )
   ->option(
@@ -61,22 +72,31 @@ if (verbose) {
 };
 
 wss->on("connection", ws => {
-  if (verbose) {
-    Chalk.green("> A socket is connected")->print_endline;
-  };
-
-  fileWatcher->Fs.on("change", () => {
+  let fsCb = () => {
     if (verbose) {
       Chalk.green("> The file was updated -> Sending an update to socket")
       ->print_endline;
     };
 
-    ws->send("update");
-  });
+    switch (command) {
+    | Some(c) => exec(c)
+    | None => ()
+    };
 
-  ws->on("close", () =>
+    ws->send("update");
+  };
+
+  if (verbose) {
+    Chalk.green("> A socket is connected")->print_endline;
+  };
+
+  fileWatcher->Fs.on("change", fsCb);
+
+  ws->on("close", () => {
     if (verbose) {
       Chalk.green("> A socket disconnected")->print_endline;
-    }
-  );
+    };
+
+    fileWatcher->Fs.off("change", fsCb);
+  });
 });
