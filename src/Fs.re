@@ -2,6 +2,8 @@ type t;
 
 type option = {interval: int};
 
+[@bs.module "fs"] external exists: string => bool = "existsSync";
+
 [@bs.module "fs"]
 external watchFile: (string, option, ('a, 'a) => unit) => t = "watchFile";
 

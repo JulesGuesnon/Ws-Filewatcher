@@ -5,7 +5,7 @@ type positional('a) = {
   default: 'a,
 };
 
-type option = {
+type yargsOption = {
   description: string,
   alias: string,
   type_: string,
@@ -15,7 +15,7 @@ type option = {
 
 [@bs.send] external command: (t, string, string) => t = "command";
 
-[@bs.send] external option: (t, string, option) => t = "option";
+[@bs.send] external option: (t, string, yargsOption) => t = "option";
 
 [@bs.send] external usage: (t, string) => t = "usage";
 
