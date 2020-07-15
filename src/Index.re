@@ -26,7 +26,7 @@ let {port, file, verbose} =
     )
   ->option(
       "verbose",
-      {description: "Allow or not logging", alias: "v", type_: "boolean"},
+      {description: "Allow logging", alias: "v", type_: "boolean"},
     )
   ->demandOption([|"f"|])
   ->default({port: 9999})
