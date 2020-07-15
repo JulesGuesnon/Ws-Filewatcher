@@ -1,0 +1,7 @@
+lib/**
+src/**/*.re
+.vscode
+.bsb.lock
+.merlin
+.bsconfig
+.merlin
