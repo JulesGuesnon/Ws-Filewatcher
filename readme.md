@@ -33,7 +33,7 @@ ws-filewatcher -f path/to/my/file
 | parameter     | `--verbose`     |
 | shortcut      | `-v`            |
 | default value | _(bool)_`false` |
-| description   | Allow logging   |
+| description   | Allow loggings  |
 
 |               | Port                                 |
 | ------------- | ------------------------------------ |
